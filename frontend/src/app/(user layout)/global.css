@@ -1,8 +1,11 @@
 @font-face {
   font-family: "Signika";
-  src: url("../fonts/Signika-Regular.ttf") format("truetype");
+  src: url("/ieltstrialsapp/frontend/src/fonts/Signika-Regular.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "Opensans";
+  src: url("/ieltstrialsapp/frontend/src/fonts/OpenSans-Regular.ttf") format("truetype");
+}
 
 * {
   margin: 0;
@@ -376,3 +379,84 @@ button:hover {
 }
 
 
+/* ------------------------------------------Exam------------------------------------------------ */
+.exambody{
+  vertical-align: baseline;
+  word-wrap: break-word;
+}
+.examroom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.navbar {
+  background-color: rgba(111, 111, 236, 0.83);
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px;
+}
+
+.exambody p {
+  padding: 10px;
+}
+
+.opensans{
+  font-family: Opensans;
+}
+
+.exampage {
+  display: flex;
+  padding: 40px;
+  gap: 190px;
+  justify-content: center;
+  align-items: top;
+}
+
+.textarea,
+.questionarea {
+  width: 40%;
+}
+
+.textarea {
+  color: #353535;
+  font-size: large;
+}
+
+.headerfortext {
+  font-weight: bold;
+  font-size: 24px;
+  color: #353535;
+}
+
+.questionarea {
+  padding-top: 50px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+
+.answerInput {
+  width: 60px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #353535;
+}
+
+.answerthequestionsinput {
+  width: 200px;
+}
+
+.pageswitcher {
+  display: flex;
+  width: 100%;
+  justify-content: center;align-items: center;
+  padding: 30px;
+}

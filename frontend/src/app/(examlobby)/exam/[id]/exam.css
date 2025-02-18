@@ -1,0 +1,143 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  vertical-align: baseline;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+:root {
+  --main: rgba(111, 111, 236, 0.83);
+}
+
+.examroom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+}
+
+p {
+  padding: 10px
+}
+
+.navbar {
+  background-color: rgba(111, 111, 236, 0.83);
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px;
+}
+
+.opensans {
+  font-family: Open sans;
+}
+
+.exampage {
+  display: flex;
+  padding: 40px;
+  gap: 190px;
+  justify-content: center;
+  align-items: top;
+}
+
+.textarea,
+.questionarea {
+  width: 40%;
+}
+
+.textarea {
+  color: #353535;
+  font-size: large;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.headerfortext {
+  font-weight: bold;
+  font-size: 24px;
+  color: #353535;
+}
+
+.questionarea {
+  padding-top: 50px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+
+.answerInput {
+  width: 60px;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid #353535;
+}
+
+.answerthequestionsinput {
+  width: 200px;
+}
+
+.pageswitcher {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.instructions {
+  background-color: var(--main);
+  border-radius: 10px;
+  color: white;
+  margin: 30px 0;
+  line-height: 40px;
+}
+
+.summary {
+  margin: 30px 0;
+  line-height: 40px;
+}
+
+
+.pageswitcher {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.chevonbutton {
+  color: white;
+  background-color: var(--main);
+  padding: 3px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submittedbutton {
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  font-style: italic;
+  cursor: pointer;
+  color: #353535
+}
+
+.subandhigh {
+  display: flex;
+  gap: 30px;
+}
