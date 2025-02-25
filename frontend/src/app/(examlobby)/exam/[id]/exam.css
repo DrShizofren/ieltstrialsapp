@@ -73,18 +73,17 @@ p {
   font-style: italic;
 }
 
-
 .answerInput {
-  width: 60px;
-  padding: 5px;
+  width: 65px;
+  min-width: 64px;
+  padding: 8px;
   margin: 5px;
+  outline: none;
   border-radius: 10px;
-  border: 1px solid #353535;
+  border: 2px solid #353535;
+  transition: width 0.2s ease-in-out;
 }
 
-.answerthequestionsinput {
-  width: 200px;
-}
 
 .pageswitcher {
   display: flex;

@@ -15,16 +15,19 @@ const questionsPage2 = [
 
 export default function Test() {
   const [answers, setAnswers] = useState(() => JSON.parse(localStorage.getItem("answers")) || {});
-  const [timeLeft, setTimeLeft] = useState(() => JSON.parse(localStorage.getItem("timeLeft")) || 60);
-  const [submitted, setSubmitted] = useState(() => JSON.parse(localStorage.getItem("submitted")) || false);
   const [page, setPage] = useState(() => JSON.parse(localStorage.getItem("page")) || 1);
   const [highlights, setHighlights] = useState(() => JSON.parse(localStorage.getItem("highlights")) || []);
-
-  // Save state to localStorage whenever it changes
+  
+  const [timeLeft, setTimeLeft] = useState(() => JSON.parse(localStorage.getItem("timeLeft")) || 60);
+  const [submitted, setSubmitted] = useState(() => JSON.parse(localStorage.getItem("submitted")) || false);
   useEffect(() => {
-    localStorage.setItem("answers", JSON.stringify(answers));
-  }, [answers]);
-
+    if (timeLeft > 0 && !submitted) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0 && !submitted) {
+      handleSubmit();
+    }
+  }, [timeLeft, submitted]);
   useEffect(() => {
     localStorage.setItem("timeLeft", JSON.stringify(timeLeft));
   }, [timeLeft]);
@@ -32,6 +35,11 @@ export default function Test() {
   useEffect(() => {
     localStorage.setItem("submitted", JSON.stringify(submitted));
   }, [submitted]);
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("answers", JSON.stringify(answers));
+  }, [answers]);
+
 
   useEffect(() => {
     localStorage.setItem("page", JSON.stringify(page));
@@ -42,14 +50,6 @@ export default function Test() {
   }, [highlights]);
 
   // Timer logic
-  useEffect(() => {
-    if (timeLeft > 0 && !submitted) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && !submitted) {
-      handleSubmit();
-    }
-  }, [timeLeft, submitted]);
 
   const handleOptionChange = (questionId, option) => {
     setAnswers((prev) => ({ ...prev, [questionId]: option }));
@@ -136,4 +136,3 @@ export default function Test() {
     </div>
   );
 }
-  

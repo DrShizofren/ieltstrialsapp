@@ -1,9 +1,10 @@
+"use client"
 import React from 'react'
 
 const Exam = () => {
-  return (
-    <div>Exam</div>
-  )
+  return <>
+    Exam
+  </>
 }
 
 export default Exam

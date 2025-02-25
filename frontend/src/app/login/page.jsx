@@ -9,8 +9,6 @@ import Link from 'next/link';
 const URL = "http://localhost:3030"
 
 const Login = ({ setUser }) => {
-
-  
   const [data, setData] = useState()
   const [password, setPassword] = useState('')
   const [usernameoremail, setUsernameoremail] = useState('')

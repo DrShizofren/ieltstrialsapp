@@ -2,6 +2,7 @@
   font-family: "Signika";
   src: url("/ieltstrialsapp/frontend/src/fonts/Signika-Regular.ttf") format("truetype");
 }
+
 @font-face {
   font-family: "Opensans";
   src: url("/ieltstrialsapp/frontend/src/fonts/OpenSans-Regular.ttf") format("truetype");
@@ -20,13 +21,16 @@
 :root {
   --main: rgba(111, 111, 236, 0.83);
 }
+
 /* ------------------------------------------------------Config--------------------------------------------- */
 [data-nextjs-toast] {
   display: none !important;
 }
+
 nextjs-portal {
   display: none !important;
 }
+
 /* --------------------------------------------------------------------------------------------------------- */
 
 .formik {
@@ -200,7 +204,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   width: 80%;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .sub-table {
@@ -269,7 +273,7 @@ button:hover {
   color: white;
 }
 
-.active{
+.active {
   cursor: pointer;
   background-color: var(--main);
   color: white;
@@ -340,7 +344,7 @@ button:hover {
 .freetst-th,
 .freetst-td {
   /* border: 1px solid rgba(111, 111, 236, 0.83); */
-  padding: 10px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -370,6 +374,7 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
 /* -------------------------------------------------------------------------------------------- */
 
 .headerfortext {
@@ -380,10 +385,11 @@ button:hover {
 
 
 /* ------------------------------------------Exam------------------------------------------------ */
-.exambody{
+.exambody {
   vertical-align: baseline;
   word-wrap: break-word;
 }
+
 .examroom {
   display: flex;
   justify-content: center;
@@ -406,7 +412,7 @@ button:hover {
   padding: 10px;
 }
 
-.opensans{
+.opensans {
   font-family: Opensans;
 }
 
@@ -442,7 +448,6 @@ button:hover {
   font-style: italic;
 }
 
-
 .answerInput {
   width: 60px;
   padding: 10px;
@@ -457,6 +462,15 @@ button:hover {
 .pageswitcher {
   display: flex;
   width: 100%;
-  justify-content: center;align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 30px;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.left {
+  text-align: left !important;
 }

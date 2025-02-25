@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+.submittedform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.submittedform button {
+  background-color: rgba(111, 111, 236, 0.83);
+  color: white;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submittedform p {
+  color: gray;
+}
+
+.wkjdwijdiw {
+  color: rgb(255, 47, 0);
+}

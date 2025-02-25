@@ -17,13 +17,16 @@
 :root {
   --main: rgba(111, 111, 236, 0.83);
 }
+
 /* ------------------------------------------------------Config--------------------------------------------- */
 [data-nextjs-toast] {
   display: none !important;
 }
+
 nextjs-portal {
   display: none !important;
 }
+
 /* --------------------------------------------------------------------------------------------------------- */
 
 .formik {
@@ -197,7 +200,8 @@ button:hover {
   display: flex;
   justify-content: space-between;
   width: 80%;
-  margin-top: 20px;
+  margin-top: 40px;
+  gap: 30px;
 }
 
 .sub-table {
@@ -266,7 +270,7 @@ button:hover {
   color: white;
 }
 
-.active{
+.active {
   cursor: pointer;
   background-color: var(--main);
   color: white;
@@ -367,6 +371,7 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
 /* -------------------------------------------------------------------------------------------- */
 
 .headerfortext {
@@ -375,4 +380,23 @@ button:hover {
   color: #353535;
 }
 
+.submittedform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Open sans';
+}
 
+.submittedform button {
+  background-color: var(--main);
+  color: white;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.left {
+  text-align: left !important;
+}

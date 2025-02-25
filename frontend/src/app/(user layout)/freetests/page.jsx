@@ -6,7 +6,7 @@ import "../global.css"
 const url = "http://localhost:3040/tests"
 
 const FreeTests = () => {
-  const [data,setData] = useState()
+  const [data, setData] = useState()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,14 +33,14 @@ const FreeTests = () => {
       </thead>
       <tbody className='freetst-tbody'>
         {
-          data ? data.map(({id}) => {
+          data ? data.map(({ id }) => {
             return <tr key={id} className='freetst-tr'>
-            <td className='freetst-td'>Test number 00{id}</td>
-            <td className='freetst-td'>Reading</td>
-            <td className='freetst-td'>
-              <button onClick={() => handleExam(id)}>Start test</button>
-            </td>
-          </tr>
+              <td className='freetst-td'>Free test number {id}</td>
+              <td className='freetst-td'>Reading</td>
+              <td className='freetst-td'>
+                <button onClick={() => handleExam(id)}>Start test</button>
+              </td>
+            </tr>
           }) : ''
         }
       </tbody>

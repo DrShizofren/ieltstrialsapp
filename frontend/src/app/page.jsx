@@ -12,7 +12,7 @@ const Home = () => {
   },[])
 
   return (
-    <>
+    <> 
       {
         user ? redirect('/user') : <Login setUser={setUser}/>
       }
