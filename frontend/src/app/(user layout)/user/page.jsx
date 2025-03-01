@@ -4,6 +4,8 @@ import { Chart } from "react-google-charts";
 
 const User = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")))
+  const [number, setNumber] = useState(0)
   const data = [
     ["Price", "Size"],
     [1, 8], [2, 5.5], [3, 4], [4, 9]
@@ -50,6 +52,30 @@ const User = () => {
                 <button>Join</button>
               </td>
             </tr>
+            <tr className='freetst-tr'>
+              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td right'>
+                <button>Join</button>
+              </td>
+            </tr>
+            <tr className='freetst-tr'>
+              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td right'>
+                <button>Join</button>
+              </td>
+            </tr>
+            <tr className='freetst-tr'>
+              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td right'>
+                <button>Join</button>
+              </td>
+            </tr>
+            <tr className='freetst-tr'>
+              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td right'>
+                <button>Join</button>
+              </td>
+            </tr>
           </tbody>
         </table>
         <table className='freetst-table'>
@@ -60,12 +86,18 @@ const User = () => {
             </tr>
           </thead>
           <tbody className='freetst-tbody'>
-            <tr className='freetst-tr'>
-              <td className='freetst-td left'>Test number named</td>
-              <td className='freetst-td right'>
-                <p>7.5 points</p>
-              </td>
-            </tr>
+            {
+              userData ? userData.results.map(({ score, name }) => {
+                return <>
+                  <tr className='freetst-tr abctable'>
+                    <td className='freetst-td left'>Test {name}</td>
+                    <td className='freetst-td right'>
+                      <p>{score} points</p>
+                    </td>
+                  </tr>
+                </>
+              }) : ''
+            }
           </tbody>
         </table>
 

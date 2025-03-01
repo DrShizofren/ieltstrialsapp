@@ -199,9 +199,9 @@ button:hover {
 .sub-tables {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 81%;
   margin-top: 40px;
-  gap: 30px;
+  gap: 60px;
 }
 
 .sub-table {
@@ -371,6 +371,7 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
 
 /* -------------------------------------------------------------------------------------------- */
 

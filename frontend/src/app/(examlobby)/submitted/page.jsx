@@ -3,50 +3,114 @@ import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import "../submitted/submitted.css"
 import axios from 'axios'
+
 const url = "http://localhost:3040/tests"
 
 const Submitted = () => {
-  const url = "http://localhost:3040/tests"
   const [correctCount, setCorrectCount] = useState(0);
+  const [ieltsScore, setIeltsScore] = useState();
   const [id, setId] = useState(localStorage.getItem("id") || 12)
-  const [data, setData] = useState()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
+  const [name, setName] = useState(localStorage.getItem("testName") || '')
+  const [data, setData] = useState(null);
+  const [patchUrl, setPatchUrl] = useState("http://localhost:3030/" + user._id + "/results")
+  const [hasSentRequest, setHasSentRequest] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(url)
-        setData(res.data)
+        const res = await axios.get(url);
+        setData(res.data);
       } catch (error) {
-        console.error('Error fetching data', error)
+        console.error('Error fetching data', error);
       }
-    }
-    fetchData()
+    };
+    fetchData();
+    console.log(patchUrl);
+
   }, []);
 
-  const answerHandler = () => {
+
+  useEffect(() => {
+    if (!ieltsScore || hasSentRequest) return;
+
+    console.log(ieltsScore, name);
+
+    if (ieltsScore && name) {
+      axios.patch(patchUrl, {
+        "results": {
+          "name": name,
+          "score": ieltsScore
+        }
+      })
+        .then(() => {
+          setHasSentRequest(true);
+        })
+        .catch(error => console.error("Error updating results:", error));
+
+      localStorage.removeItem('answers');
+      localStorage.removeItem('testName');
+      localStorage.removeItem('id');
+    } else {
+      console.log("Failed initialization");
+
+    }
+
+  }, [ieltsScore]);
+
+
+  useEffect(() => {
     if (data) {
-      const correctAnswers = data[id - 1].answers; // Correct answers from data
-      const studentAnswers = JSON.parse(localStorage.getItem("answers")) || []; // Student's answers
+      const correctAnswers = data[id - 1]?.answers || [];
+      const studentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
 
       let correct = 0;
-      correctAnswers.forEach((answer, index) => {
-        if (answer === studentAnswers[index]) {
-          correct++;
+
+      studentAnswers.forEach(({ number, answer }) => {
+        const correctAnswer = correctAnswers[number - 1];
+        if (correctAnswer) {
+          const normalizedCorrect = String(correctAnswer).trim().toLowerCase();
+          const normalizedStudent = String(answer).trim().toLowerCase();
+          if (normalizedCorrect === normalizedStudent) {
+            correct++;
+          }
         }
       });
+
+      console.log("Final Correct Count:", correct);
       setCorrectCount(correct);
+      setIeltsScore(calculateIeltsScore(correct));
     }
-  }
-  answerHandler()
-  return <div className='submittedform'>
+  }, [data, id]);
 
-    <h1>Your Results are submitted!</h1>
-    <p>Your results will be displayed in the dashboard</p>
-    <button onClick={() => redirect("/")}>Back to home page</button>
-    {
-      console.log(correctCount)
-    }
-  </div>
-}
+  const calculateIeltsScore = (correct) => {
+    if (correct >= 39) return 9.0;
+    if (correct >= 37) return 8.5;
+    if (correct >= 35) return 8.0;
+    if (correct >= 32) return 7.5;
+    if (correct >= 30) return 7.0;
+    if (correct >= 27) return 6.5;
+    if (correct >= 23) return 6.0;
+    if (correct >= 19) return 5.5;
+    if (correct >= 15) return 5.0;
+    if (correct >= 12) return 4.5;
+    if (correct >= 9) return 4.0;
+    if (correct >= 6) return 3.5;
+    if (correct >= 4) return 3.0;
+    if (correct >= 2) return 2.5;
+    return 2.0;
+  };
 
-export default Submitted
+  return (
+    <div className='submittedform'>
+      <h1>Your Results are Submitted!</h1>
+      <p>Your results will be displayed in the dashboard</p>
+      <p>Correct Answers: {correctCount}/40</p>
+      <p>Your IELTS Reading Score: {ieltsScore}</p>
+      <button onClick={() => redirect("/")}>Back to Home Page</button>
+      {/* <button onClick={() => setIeltsScore(9)}>Ielts 9</button> */}
+    </div>
+  );
+};
+
+export default Submitted;

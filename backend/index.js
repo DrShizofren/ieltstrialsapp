@@ -50,6 +50,15 @@ app.put('/:_id', async (req, res) => {
         res.status(500).send('Error updating user');
     }
 });
+app.get('/:_id', async (req, res) => {
+    const { _id } = req.params;
+    try {
+        const data = await User.findById(_id);
+        res.send(data);
+    } catch (error) {
+        res.status(500).send('Error fetching users');
+    }
+});
 
 // PUT (Update only the results field)
 app.patch('/:_id/results', async (req, res) => {
@@ -87,6 +96,7 @@ app.delete('/:_id', async (req, res) => {
         res.status(500).send('Error deleting user');
     }
 });
+
 
 app.listen(port, () => {
     mongoose.connect("mongodb+srv://aslancaafarov:1pq0dh77990erP@ieltstrials.viknv.mongodb.net/")

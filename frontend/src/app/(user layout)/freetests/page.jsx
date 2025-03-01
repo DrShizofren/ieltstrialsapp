@@ -19,7 +19,8 @@ const FreeTests = () => {
     }
     fetchData()
   }, [])
-  const handleExam = (id) => {
+  const handleExam = (id, name) => {
+    localStorage.setItem("testName", name)
     redirect(`/exam/${id}`)
   }
   return <div className='freetst-body'>
@@ -33,12 +34,12 @@ const FreeTests = () => {
       </thead>
       <tbody className='freetst-tbody'>
         {
-          data ? data.map(({ id }) => {
+          data ? data.map(({ id, name }) => {
             return <tr key={id} className='freetst-tr'>
               <td className='freetst-td'>Free test number {id}</td>
               <td className='freetst-td'>Reading</td>
               <td className='freetst-td'>
-                <button onClick={() => handleExam(id)}>Start test</button>
+                <button onClick={() => handleExam(id, name)}>Start test</button>
               </td>
             </tr>
           }) : ''

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 
 export default function ExamLayout({ children }) {
-  const initialTime = 10000;
+  const initialTime = 40;
   const [timeLeft, setTimeLeft] = useState(() => {
     return JSON.parse(localStorage.getItem("timeLeft")) ?? initialTime;
   });
@@ -32,6 +32,7 @@ export default function ExamLayout({ children }) {
     setSubmitted(true);
     localStorage.removeItem("timeLeft")
     localStorage.removeItem("submitted")
+    setSubmitted(false)
     redirect("/submitted")
   }
 
