@@ -1,0 +1,20 @@
+.upcomingpage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  font-size: x-large;
+}
+
+.upbutton {
+  background-color: #6f6fec;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 30px;
+}

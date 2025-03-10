@@ -2,7 +2,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { redirect } from 'next/navigation'
-import "../global.css"
+
 const url = "http://localhost:3040/tests"
 
 const FreeTests = () => {

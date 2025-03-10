@@ -1,39 +1,110 @@
 "use client"
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
 import { Chart } from "react-google-charts";
 
 const User = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")))
   const [number, setNumber] = useState(0)
-  const data = [
-    ["Price", "Size"],
-    [1, 8], [2, 5.5], [3, 4], [4, 9]
-  ]
+  const [loginData, setLoginData] = useState([])
+  const [setted, setSetted] = useState(true)
+  const [chartData, setChartData] = useState([
+    ["Attempt", "Score"],
+    [1, 8],
+  ]);
+
+  const URL = "http://localhost:3030"
+
+  const updateChartData = (results) => {
+    setChartData((prevData) => {
+      let lastPrice = prevData[prevData.length - 1][0];
+      const newData = [...prevData];
+      results.forEach(result => {
+        lastPrice += 1;
+        newData.push([lastPrice, result.score]);
+      });
+      return newData;
+    });
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(URL);
+      } catch (error) {
+        console.error('Error fetching data', error);
+      }
+    };
+    fetchData();
+    if (setted) {
+      if (userData.results && Array.isArray(userData.results)) {
+        updateChartData(userData.results);
+        setSetted(false)
+      }
+    }
+    console.log("Component loaded");
+
+  }, [])
+
+
+  useEffect(() => {
+    if (loginData && userData) {
+      const matchingUser = loginData.find(user => user._id === userData._id);
+
+      if (matchingUser) {
+        localStorage.setItem("user", JSON.stringify(matchingUser));
+        setUserData(matchingUser);
+        // console.log("LocalStorage updated:", matchingUser);
+      } else {
+        console.log("User not found in database.");
+      }
+    }
+  }, [loginData]);
+
+
+
   const options = {
-    title: "Last results and improvements",
-    titleTextStyle: { color: "#fff" },
+    title: "Last Results and Improvements",
+    titleTextStyle: { color: "#333", fontSize: 18, bold: true },
     curveType: "function",
-    backgroundColor: "black",
-    colors: ["red"],
+    backgroundColor: "white",
+    colors: ["#6f6fec"],
     hAxis: {
-      gridlines: { color: "transparent" }, ticks: [], titleTextStyle: { color: "#fff" },
-      textStyle: { color: "#fff" }
+      gridlines: { color: "#ddd" },
+      ticks: [],
+      titleTextStyle: { color: "#666", fontSize: 14 },
+      textStyle: { color: "#666" }
     },
     vAxis: {
-      viewWindow: { max: 9.5, min: 0 }, gridlines: { color: "transparent" }, titleTextStyle: { color: "#fff" },
-      textStyle: { color: "#fff" }
+      viewWindow: { max: 9.5, min: 0 },
+      gridlines: { color: "#ddd" },
+      titleTextStyle: { color: "#666", fontSize: 14 },
+      textStyle: { color: "#666" }
     },
     legend: "none"
-  }
+  };
   return <>
     <div className={`content ${sidebarOpen ? "blurred" : ""}`}>
-      <div style={{ width: "1300px", height: "500px", border: "2px solid black", borderRadius: "20px", overFlow: "hidden", background: "black", padding: "20px", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "40px" }} className='chart'>
+      <div style={{
+        width: "1300px",
+        height: "500px",
+        border: "4px solid #6f6fec",
+        borderRadius: "20px",
+        overflow: "hidden",
+        background: "white",
+        padding: "20px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "40px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+        cursor: "pointer"
+      }}>
         <Chart
           chartType="LineChart"
           width="100%"
           height="400px"
-          data={data}
+          data={chartData}
           options={options}
         />
       </div>
@@ -42,7 +113,7 @@ const User = () => {
           <thead className='freetst-thead'>
             <tr className='freetst-tr'>
               <th className='freetst-th'>Upcoming tests</th>
-              <th className='freetst-th'></th>
+              <th className='freetst-th'>Participate</th>
             </tr>
           </thead>
           <tbody className='freetst-tbody'>
@@ -53,25 +124,25 @@ const User = () => {
               </td>
             </tr>
             <tr className='freetst-tr'>
-              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td left'>Test number 2</td>
               <td className='freetst-td right'>
                 <button>Join</button>
               </td>
             </tr>
             <tr className='freetst-tr'>
-              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td left'>Test number 3</td>
               <td className='freetst-td right'>
                 <button>Join</button>
               </td>
             </tr>
             <tr className='freetst-tr'>
-              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td left'>Test number 4</td>
               <td className='freetst-td right'>
                 <button>Join</button>
               </td>
             </tr>
             <tr className='freetst-tr'>
-              <td className='freetst-td left'>Test number 1</td>
+              <td className='freetst-td left'>Test number 5</td>
               <td className='freetst-td right'>
                 <button>Join</button>
               </td>
@@ -82,7 +153,7 @@ const User = () => {
           <thead className='freetst-thead'>
             <tr className='freetst-tr'>
               <th className='freetst-th'>Last results</th>
-              <th className='freetst-th'></th>
+              <th className='freetst-th'>Score</th>
             </tr>
           </thead>
           <tbody className='freetst-tbody'>

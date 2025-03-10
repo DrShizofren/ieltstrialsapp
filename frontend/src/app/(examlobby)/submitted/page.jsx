@@ -103,12 +103,13 @@ const Submitted = () => {
 
   return (
     <div className='submittedform'>
-      <h1>Your Results are Submitted!</h1>
-      <p>Your results will be displayed in the dashboard</p>
-      <p>Correct Answers: {correctCount}/40</p>
-      <p>Your IELTS Reading Score: {ieltsScore}</p>
-      <button onClick={() => redirect("/")}>Back to Home Page</button>
-      {/* <button onClick={() => setIeltsScore(9)}>Ielts 9</button> */}
+      <div className="submitted-box">
+        <h1>Your Results are Submitted!</h1>
+        <p>Your results will be displayed in the dashboard</p>
+        <p>Correct Answers: {correctCount}/40</p>
+        <p>Your IELTS Reading Score: {ieltsScore}</p>
+        <button onClick={() => redirect("/")}>Back to Home Page</button>
+      </div>
     </div>
   );
 };

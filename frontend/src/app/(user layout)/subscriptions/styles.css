@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "Signika";
+  src: url("C:\Users\Fikret\Desktop\ieltstrialsapp\ieltstrialsapp\frontend\src\fonts\Signika-Regular.ttf") format("truetype");
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Signika;
+  text-decoration: none;
+  user-select: none;
+  list-style: none;
+}
+
+:root {
+  --main: rgba(111, 111, 236, 0.83);
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 100vh;
+}
+
+.card {
+  border: 1px solid var(--main);
+  padding: 30px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  gap: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px var(--main);
+}
+
+.planbutton {
+  padding: 10px 4px;
+  border: 1px solid var(--main);
+  background-color: var(--main);
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.card:hover {
+  background-color: var(--main);
+  color: white;
+}
+
+.card:hover .planbutton {
+  color: black;
+  background-color: white;
+}
