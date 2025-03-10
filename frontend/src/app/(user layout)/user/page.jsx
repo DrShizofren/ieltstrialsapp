@@ -31,6 +31,7 @@ const User = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(URL);
+        setLoginData(res.data)
       } catch (error) {
         console.error('Error fetching data', error);
       }
@@ -43,9 +44,8 @@ const User = () => {
       }
     }
     console.log("Component loaded");
-
+    console.log(loginData);
   }, [])
-
 
   useEffect(() => {
     if (loginData && userData) {
@@ -53,6 +53,7 @@ const User = () => {
 
       if (matchingUser) {
         localStorage.setItem("user", JSON.stringify(matchingUser));
+        console.log(matchingUser);
         setUserData(matchingUser);
         // console.log("LocalStorage updated:", matchingUser);
       } else {
@@ -60,8 +61,6 @@ const User = () => {
       }
     }
   }, [loginData]);
-
-
 
   const options = {
     title: "Last Results and Improvements",

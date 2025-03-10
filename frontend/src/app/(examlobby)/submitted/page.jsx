@@ -15,6 +15,8 @@ const Submitted = () => {
   const [data, setData] = useState(null);
   const [patchUrl, setPatchUrl] = useState("http://localhost:3030/" + user._id + "/results")
   const [hasSentRequest, setHasSentRequest] = useState(false);
+  const [section, setSection] = useState(JSON.parse(localStorage.getItem("section")) || [])
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,17 +28,14 @@ const Submitted = () => {
       }
     };
     fetchData();
-    console.log(patchUrl);
-
   }, []);
 
 
   useEffect(() => {
     if (!ieltsScore || hasSentRequest) return;
-
     console.log(ieltsScore, name);
 
-    if (ieltsScore && name) {
+    if (ieltsScore && name && section === "reading") {
       axios.patch(patchUrl, {
         "results": {
           "name": name,
@@ -53,9 +52,12 @@ const Submitted = () => {
       localStorage.removeItem('id');
     } else {
       console.log("Failed initialization");
-
     }
-
+    localStorage.removeItem("essayAnswers")
+    localStorage.removeItem("answers")
+    localStorage.removeItem("id")
+    localStorage.removeItem("section")
+    localStorage.removeItem("testName")
   }, [ieltsScore]);
 
 
@@ -101,17 +103,25 @@ const Submitted = () => {
     return 2.0;
   };
 
-  return (
-    <div className='submittedform'>
-      <div className="submitted-box">
-        <h1>Your Results are Submitted!</h1>
-        <p>Your results will be displayed in the dashboard</p>
-        <p>Correct Answers: {correctCount}/40</p>
-        <p>Your IELTS Reading Score: {ieltsScore}</p>
-        <button onClick={() => redirect("/")}>Back to Home Page</button>
-      </div>
-    </div>
-  );
+  return <>
+    {
+      section === "reading" ? <div className='submittedform'>
+        <div className="submitted-box">
+          <h1>Your Results are Submitted!</h1>
+          <p>Your results will be displayed in the dashboard</p>
+          <p>Correct Answers: {correctCount}/40</p>
+          <p>Your IELTS Reading Score: {ieltsScore}</p>
+          <button onClick={() => redirect("/")}>Back to Home Page</button>
+        </div>
+      </div> : section === "writing" ? <div className='submittedform'>
+        <div className="submitted-box">
+          <h1>Your Essays are Submitted!</h1>
+          <p>Your results will be checked by teacher and sent to you</p>
+          <button onClick={() => redirect("/")}>Back to Home Page</button>
+        </div>
+      </div> : ''
+    }
+  </>
 };
 
 export default Submitted;

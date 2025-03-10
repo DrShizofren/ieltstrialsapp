@@ -423,15 +423,29 @@
     },
     {
       "id": 7,
-      "name": "ieltsplustree-writing-002",
+      "name": "ieltsplustree-writing-001",
       "section": "writing",
       "parts": [
         {
-          "question_title": "",
-          "image": ""
+          "part": 1,
+          "question_titles": [
+            "IELTS Writing Task 1",
+            "You should spend about 20 minutes on this task.",
+            "Summarize the information by selecting and reporting the main features, and make comparisons where relevant.",
+            "Write at least 150 words."
+          ],
+          "imagesrc": "/writing1.png"
         },
         {
-          "question_title": ""
+          "part": 2,
+          "question_titles": [
+            "IELTS Writing Task 2",
+            "You should spend about 40 minutes on this task.",
+            "Some people believe that schools should focus more on teaching practical skills that help students find jobs, while others think that academic subjects are more important.",
+            "Discuss both views and give your own opinion.",
+            "Give reasons for your answer and include any relevant examples from your own knowledge or experience.",
+            "Write at least 250 words."
+          ]
         }
       ]
     }

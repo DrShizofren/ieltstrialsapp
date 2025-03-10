@@ -36,7 +36,7 @@
   gap: 20px;
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.15s;
   box-shadow: 0 4px 10px var(--main);
 }
 
@@ -52,6 +52,7 @@
 .card:hover {
   background-color: var(--main);
   color: white;
+  transform: scale(1.1);
 }
 
 .card:hover .planbutton {

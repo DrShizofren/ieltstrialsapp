@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 
 export default function ExamLayout({ children }) {
-  const initialTime = 40;
+  const initialTime = 3600;
   const [timeLeft, setTimeLeft] = useState(() => {
     return JSON.parse(localStorage.getItem("timeLeft")) ?? initialTime;
   });
