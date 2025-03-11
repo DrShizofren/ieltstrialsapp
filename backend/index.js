@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('Users', userSchema);
 
-// GET all users
 app.get('/', async (req, res) => {
     try {
         const data = await User.find();
@@ -27,7 +26,6 @@ app.get('/', async (req, res) => {
     }
 });
 
-// POST (Create a new user)
 app.post('/', async (req, res) => {
     try {
         const data = await User.create(req.body);
@@ -37,7 +35,6 @@ app.post('/', async (req, res) => {
     }
 });
 
-// PUT (Update a user by _id)
 app.put('/:_id', async (req, res) => {
     const { _id } = req.params;
     try {
@@ -60,15 +57,14 @@ app.get('/:_id', async (req, res) => {
     }
 });
 
-// PUT (Update only the results field)
 app.patch('/:_id/results', async (req, res) => {
     const { _id } = req.params;
-    const { results } = req.body; // Expecting an object, not an array
+    const { results } = req.body;
 
     try {
         const updatedUser = await User.findByIdAndUpdate(
             _id,
-            { $push: { results } },  // Adds new object to the array
+            { $push: { results } },
             { new: true }
         );
 
@@ -82,8 +78,6 @@ app.patch('/:_id/results', async (req, res) => {
     }
 });
 
-
-// DELETE (Remove a user by _id)
 app.delete('/:_id', async (req, res) => {
     const { _id } = req.params;
     try {

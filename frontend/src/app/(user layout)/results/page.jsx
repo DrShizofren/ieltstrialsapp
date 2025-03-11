@@ -22,7 +22,7 @@ const Results = () => {
                   <p>{score} points</p>
                 </td>
                 <td className='freetst-td'>
-                  <button onClick={() => console.log(name)}>Review mistakes</button>
+                  <button>Review mistakes</button>
                 </td>
               </tr>
             </>

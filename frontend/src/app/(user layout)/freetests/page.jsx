@@ -23,7 +23,7 @@ const FreeTests = () => {
     localStorage.setItem("testName", name)
     redirect(`/exam/${id}`)
   }
-  console.log(data);
+  // console.log(data);
 
   return <div className='freetst-body'>
     <table className='freetst-table'>

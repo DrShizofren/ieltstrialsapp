@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation'
 export default function RootLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname()
-  console.log(pathname)
+  // console.log(pathname)
   return (
     <>
       {sidebarOpen ? <div className="user-sidebar">

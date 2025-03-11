@@ -43,8 +43,8 @@ const User = () => {
         setSetted(false)
       }
     }
-    console.log("Component loaded");
-    console.log(loginData);
+    // console.log("Component loaded");
+    // console.log(loginData);
   }, [])
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const User = () => {
 
       if (matchingUser) {
         localStorage.setItem("user", JSON.stringify(matchingUser));
-        console.log(matchingUser);
+        // console.log(matchingUser);
         setUserData(matchingUser);
         // console.log("LocalStorage updated:", matchingUser);
       } else {

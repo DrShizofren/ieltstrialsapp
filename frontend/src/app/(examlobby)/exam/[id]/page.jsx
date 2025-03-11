@@ -12,7 +12,7 @@ const Exam = () => {
   const [page, setPage] = useState(0)
   const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem("answers")) || [])
   const [essayAnswers, setEssayAnswers] = useState(() => {
-    return JSON.parse(localStorage.getItem("essayAnswers")) || [''];
+    return JSON.parse(localStorage.getItem("essayAnswers")) || [];
   });
   const [section, setSection] = useState('')
   let { id } = useParams()

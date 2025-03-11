@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faX } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
+import { Eye, EyeOff } from 'lucide-react';
 
 const URL = "http://localhost:3030"
 
@@ -84,7 +85,10 @@ const Login = ({ setUser }) => {
           <p className='errormessage' style={{
             "visibility": passwordValid ? 'hidden' : 'visible'
           }}>Password must be at least 3 characters and contain at least 1 digit</p>
-          <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={() => setShowPassword(!showPassword)} className='eyeicon' />
+          {/* <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> */}
+          {
+            showPassword ? <EyeOff onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> : <Eye onClick={() => setShowPassword(!showPassword)} className='eyeicon' />
+          }
         </div>
         <p className='signuplink'>Don't have an account? <Link href='/signup'>Sign Up</Link></p>
         <button type='submit' className='loginbutton'>Log in</button>

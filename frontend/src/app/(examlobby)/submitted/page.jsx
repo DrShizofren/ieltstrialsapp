@@ -33,7 +33,7 @@ const Submitted = () => {
 
   useEffect(() => {
     if (!ieltsScore || hasSentRequest) return;
-    console.log(ieltsScore, name);
+    // console.log(ieltsScore, name);
 
     if (ieltsScore && name && section === "reading") {
       axios.patch(patchUrl, {
@@ -58,6 +58,7 @@ const Submitted = () => {
     localStorage.removeItem("id")
     localStorage.removeItem("section")
     localStorage.removeItem("testName")
+    localStorage.removeItem("timeLeft")
   }, [ieltsScore]);
 
 
@@ -79,7 +80,7 @@ const Submitted = () => {
         }
       });
 
-      console.log("Final Correct Count:", correct);
+      // console.log("Final Correct Count:", correct);
       setCorrectCount(correct);
       setIeltsScore(calculateIeltsScore(correct));
     }
