@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Trials",
+  title: "IELTsTP",
   description: "IELTs trial app",
 };
 

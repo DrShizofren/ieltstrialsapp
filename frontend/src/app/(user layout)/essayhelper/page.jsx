@@ -28,7 +28,7 @@ const EssayHelper = () => {
         },
         body: JSON.stringify({
           model: "command",
-          prompt: `Give me a better and more academic version of this sentence. Imagine you are an IELTS teacher. Also, explain why it is a better option: ${inputText}`,
+          prompt: `Give me an academic version of this sentence improving it for better score. Imagine you are an IELTS teacher, explain why it is a better option: ${inputText}`,
           max_tokens: 500,
         }),
       });
