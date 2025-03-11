@@ -160,6 +160,7 @@ p {
   box-sizing: content-box;
   outline: none;
   color: #353535;
+  resize: none;
 }
 
 .question-title {

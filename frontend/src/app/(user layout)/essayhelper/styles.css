@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Opensans";
+  src: url("/ieltstrialsapp/frontend/src/fonts/OpenSans-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: 'Opensans', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.essay-helper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.content-box {
+  max-width: 90%;
+  width: 700px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  background: white;
+}
+
+.help-h1 {
+  color: #333;
+  text-align: center;
+}
+
+.help-h1 span {
+  color: #6f6fec;
+}
+
+.helpsquare {
+  border: 4px solid #6f6fec;
+  border-radius: 20px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 80%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.help-textarea {
+  width: 100%;
+  height: 120px;
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #6f6fec;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+}
+
+.help-button {
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  animation: colorChange 5s infinite;
+}
+
+.help-button:hover {
+  background-color: #5555d3;
+  transform: scale(1.05);
+}
+
+.response {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+  background: #f3f3ff;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: #6f6fec;
+  }
+
+  25% {
+    background-color: #8a6fec;
+  }
+
+  50% {
+    background-color: #a96fec;
+  }
+
+  75% {
+    background-color: #6f9fec;
+  }
+
+  100% {
+    background-color: #6f6fec;
+  }
+}
+
+.help-h1 {
+  color: "#6f6fec"
+}
+
+.brainicon {
+  margin-left: 10px;
+}

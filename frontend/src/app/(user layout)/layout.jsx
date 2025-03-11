@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Book, Calendar, Star, Edit, Settings, CheckCircle, CircleX, X, House } from 'lucide-react';
+import { Book, Calendar, Star, Edit, Settings, CheckCircle, CircleX, X, House, BrainCircuit } from 'lucide-react';
 import Image from 'next/image';
 import "../global.css"
 import { usePathname } from 'next/navigation'
@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
         <div className="user-sidebar-content">
           <div className='usermenu1'>
             <Link onClick={() => setSidebarOpen(!sidebarOpen)} className={'/user' === pathname ? "sidebarlinks active" : "sidebarlinks"} href="/user"><House size={18} /> Home</Link>
+            <Link onClick={() => setSidebarOpen(!sidebarOpen)} className={'/essayhelper' === pathname ? "sidebarlinks active" : "sidebarlinks"} href="/essayhelper"><BrainCircuit size={18} /> Essay helper AI</Link>
           </div>
           <div className="line"></div>
           <div className='usermenu1'>
