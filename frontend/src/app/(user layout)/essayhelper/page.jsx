@@ -28,7 +28,7 @@ const EssayHelper = () => {
         },
         body: JSON.stringify({
           model: "command",
-          prompt: `Give me an academic version of this sentence improving it for better score. Imagine you are an IELTS teacher, explain why it is a better option: ${inputText}`,
+          prompt: `Rewrite the following sentence in a more formal, precise, and academically appropriate manner for an IELTS essay. Then, provide a brief explanation of why the new version is a better choice in terms of clarity, coherence, and lexical resource: ${inputText}`,
           max_tokens: 500,
         }),
       });
@@ -37,10 +37,10 @@ const EssayHelper = () => {
       if (data.text) {
         setResponseText(data.text);
       } else {
-        setError("No response received. Try again.");
+        setError("No response received. Try again.")
       }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      setError("An error occurred. Please try again.")
     }
     setLoading(false);
   };

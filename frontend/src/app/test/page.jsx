@@ -1,15 +1,15 @@
-import Image from 'next/image'
-import React from 'react'
-
+'use client'
+import React, { useState } from 'react'
+import "./test.css"
 const Test = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return <>
-    <Image
-      src="/writing1.png"
-      alt="Picture of the author"
-      className='profile-images'
-      width={600}
-      height={400}
-    />
+    <div className="container">
+      <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "Close" : "Open"}
+      </button>
+      <div className={`sidebar ${isOpen ? "open" : "closed"}`}>Sidebar Content</div>
+    </div>
   </>
 }
 

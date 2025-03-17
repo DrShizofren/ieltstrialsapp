@@ -1,66 +1,44 @@
-.test-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+@keyframes lefttoright {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 250px;
+  }
 }
 
-.card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+@keyframes righttoleft {
+  0% {
+    width: 250px;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
-.card-content {
-  text-align: center;
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.timer {
-  font-size: 18px;
-  color: red;
-  margin-bottom: 10px;
-}
-
-.question-block {
-  margin: 15px 0;
-  text-align: left;
-}
-
-.question {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.option-label {
-  display: block;
-  margin: 5px 0;
-}
-
-.submit-button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 16px;
+.toggle-btn {
+  padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
 }
 
-.submit-button:disabled {
-  background: gray;
-  cursor: not-allowed;
+.sidebar {
+  height: 100vh;
+  background: lightgray;
+  overflow: hidden;
 }
 
-.submitted-message {
-  margin-top: 15px;
-  font-weight: bold;
-  color: green;
+.sidebar.open {
+  animation: lefttoright 0.3s forwards;
+}
+
+.sidebar.closed {
+  animation: righttoleft 0.3s forwards;
 }

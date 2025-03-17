@@ -9,10 +9,9 @@ import { usePathname } from 'next/navigation'
 export default function RootLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname()
-  // console.log(pathname)
   return (
     <>
-      {sidebarOpen ? <div className="user-sidebar">
+      <div className={sidebarOpen ? 'user-sidebar opened' : 'user-sidebar closed'}>
         <X className="closesidebar" onClick={() => setSidebarOpen(!sidebarOpen)} />
         <h1 className='usersidebarh1'>IELTsTP</h1>
         <div className="user-sidebar-content">
@@ -33,7 +32,7 @@ export default function RootLayout({ children }) {
           </div>
 
         </div>
-      </div> : ''}
+      </div>
       <div className={`user-page-body ${sidebarOpen ? "blurred" : ""}`}>
         <div className="container">
           <div className="navigation">

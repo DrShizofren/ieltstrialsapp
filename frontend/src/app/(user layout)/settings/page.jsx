@@ -1,8 +1,9 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./styles.css"
 import { ChevronRight } from 'lucide-react'
 import { redirect } from 'next/navigation'
+import { LoginUserContext } from '@/app/Context/loginusercontext'
 
 const Settings = () => {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -14,9 +15,13 @@ const Settings = () => {
     }
   }
 
+  const { setUser } = useContext(LoginUserContext)
+
   const confirmLogout = () => {
     setShowConfirm(false);
+    setUser(false)
     localStorage.removeItem("user")
+    console.log("redirectreed");
     redirect("/")
   }
 

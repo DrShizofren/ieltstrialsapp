@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Chart } from "react-google-charts";
 
 const User = () => {
@@ -43,8 +43,6 @@ const User = () => {
         setSetted(false)
       }
     }
-    // console.log("Component loaded");
-    // console.log(loginData);
   }, [])
 
   useEffect(() => {

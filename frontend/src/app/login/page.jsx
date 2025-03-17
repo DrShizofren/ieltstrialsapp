@@ -1,15 +1,16 @@
 "use client"
 import axios from 'axios'
 import "../global.css"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faX } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
+import { LoginUserContext } from '../Context/loginusercontext';
 
 const URL = "http://localhost:3030"
 
-const Login = ({ setUser }) => {
+const Login = () => {
   const [data, setData] = useState()
   const [password, setPassword] = useState('')
   const [usernameoremail, setUsernameoremail] = useState('')
@@ -18,6 +19,8 @@ const Login = ({ setUser }) => {
   const [typedUsernameorEmail, setTypedusernameoremail] = useState(true)
   const [passwordValid, setPasswordValid] = useState(true)
   const [authentication, setAuthentication] = useState(true)
+
+  const { setUser } = useContext(LoginUserContext)
 
   const validatePassword = (password) => {
     return password.length >= 3 && /\d/.test(password);
@@ -61,38 +64,40 @@ const Login = ({ setUser }) => {
 
   return <>
     <div className="login">
-      <form onSubmit={formHandler} className='formik'>
-        <h1 className='logintitle'>Login</h1>
-        {
-          !authentication ? <p className='incorrect'>
-            User not found <FontAwesomeIcon icon={faX} onClick={() => setAuthentication(true)} style={{ "cursor": "pointer" }} />
-          </p> : ''
-        }
-
-        <label htmlFor="usernameoremail" className='input-login-lable'>Enter username or email</label>
-        <div className="passworddiv">
-          <input type="text" name='usernameoremail' className={typedUsernameorEmail ? 'login-input' : 'login-input-error'} onChange={(e) => setUsernameoremail(e.target.value)} />
-          <p className='errormessage' style={{
-            "visibility": typedUsernameorEmail ? 'hidden' : 'visible'
-          }}>incorrect username or email</p>
-        </div>
-        <label htmlFor="password" className='input-login-lable'>Password</label>
-        <div className="passworddiv">
-          <input type={showPassword ? "text" : "password"} name='password'
-            onChange={(e) => setPassword(e.target.value)}
-            className={passwordValid ? 'login-input' : 'login-input-error'}
-          />
-          <p className='errormessage' style={{
-            "visibility": passwordValid ? 'hidden' : 'visible'
-          }}>Password must be at least 3 characters and contain at least 1 digit</p>
-          {/* <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> */}
+      <div className="loginsquare">
+        <form onSubmit={formHandler} className='formik'>
+          <h1 className='logintitle'>Login</h1>
           {
-            showPassword ? <EyeOff onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> : <Eye onClick={() => setShowPassword(!showPassword)} className='eyeicon' />
+            !authentication ? <p className='incorrect'>
+              User not found <FontAwesomeIcon icon={faX} onClick={() => setAuthentication(true)} style={{ "cursor": "pointer" }} />
+            </p> : ''
           }
-        </div>
-        <p className='signuplink'>Don't have an account? <Link href='/signup'>Sign Up</Link></p>
-        <button type='submit' className='loginbutton'>Log in</button>
-      </form>
+
+          <label htmlFor="usernameoremail" className='input-login-lable'>Enter username or email</label>
+          <div className="passworddiv">
+            <input type="text" name='usernameoremail' className={typedUsernameorEmail ? 'login-input' : 'login-input-error'} onChange={(e) => setUsernameoremail(e.target.value)} />
+            <p className='errormessage' style={{
+              "visibility": typedUsernameorEmail ? 'hidden' : 'visible'
+            }}>incorrect username or email</p>
+          </div>
+          <label htmlFor="password" className='input-login-lable'>Password</label>
+          <div className="passworddiv">
+            <input type={showPassword ? "text" : "password"} name='password'
+              onChange={(e) => setPassword(e.target.value)}
+              className={passwordValid ? 'login-input' : 'login-input-error'}
+            />
+            <p className='errormessage' style={{
+              "visibility": passwordValid ? 'hidden' : 'visible'
+            }}>Password must be at least 3 characters and contain at least 1 digit</p>
+            {/* <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> */}
+            {
+              showPassword ? <EyeOff size={16} onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> : <Eye size={16} onClick={() => setShowPassword(!showPassword)} className='eyeicon' />
+            }
+          </div>
+          <p className='signuplink'>Don't have an account? <Link href='/signup'>Sign Up</Link></p>
+          <button type='submit' className='loginbutton'>Log in</button>
+        </form>
+      </div>
     </div>
   </>
 }
