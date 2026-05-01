@@ -1,66 +1,65 @@
 "use client"
-import axios from 'axios'
 import "../global.css"
-import React, { useContext, useEffect, useState } from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faX } from "@fortawesome/free-solid-svg-icons";
+import React, { useContext, useState } from 'react'
 import Link from 'next/link';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, X } from 'lucide-react';
 import { LoginUserContext } from '../Context/loginusercontext';
 
-const URL = "http://localhost:3030"
+const ADMIN = {
+  userName: "Admin",
+  password: "admin123",
+  results: [
+    { name: "ieltsplustree-test1-reading", score: 5.0 },
+    { name: "ieltsplustree-test2-reading", score: 7.5 },
+    { name: "ieltsplustree-test3-reading", score: 4.5 },
+    { name: "ieltsplustree-test4-reading", score: 8.0 },
+    { name: "ieltsplustree-test5-reading", score: 6.0 },
+    { name: "ieltsplustree-test6-reading", score: 8.5 },
+    { name: "ieltsplustree-test7-reading", score: 5.5 },
+    { name: "ieltsplustree-test8-reading", score: 9.0 },
+    { name: "ieltsplustree-test9-reading", score: 6.5 },
+    { name: "ieltsplustree-test10-reading", score: 4.0 },
+  ],
+}
 
 const Login = () => {
-  const [data, setData] = useState()
   const [password, setPassword] = useState('')
   const [usernameoremail, setUsernameoremail] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [typedPass, setTypedpass] = useState(true)
   const [typedUsernameorEmail, setTypedusernameoremail] = useState(true)
-  const [passwordValid, setPasswordValid] = useState(true)
   const [authentication, setAuthentication] = useState(true)
 
   const { setUser } = useContext(LoginUserContext)
 
-  const validatePassword = (password) => {
-    return password.length >= 3 && /\d/.test(password);
-  };
-
   const formHandler = (e) => {
     e.preventDefault()
 
-    const isPasswordValid = validatePassword(password);
-    setPasswordValid(isPasswordValid);
+    const validUsername = usernameoremail !== ""
+    const validPassword = password !== ""
+    setTypedusernameoremail(validUsername)
+    setTypedpass(validPassword)
 
-    const findUser = data.find((elem) => {
-      return (elem.userName === usernameoremail || elem.email === usernameoremail) && elem.password === password
-    })
+    if (!validUsername || !validPassword) return
 
-    if (findUser && isPasswordValid) {
+    if (usernameoremail === ADMIN.userName && password === ADMIN.password) {
       setUser(true)
-      localStorage.setItem("user", JSON.stringify(findUser))
+      localStorage.setItem("user", JSON.stringify(ADMIN))
+      return
+    }
+
+    const users = JSON.parse(localStorage.getItem("users") || "[]")
+    const found = users.find(u =>
+      (u.userName === usernameoremail || u.email === usernameoremail) && u.password === password
+    )
+
+    if (found) {
+      setUser(true)
+      localStorage.setItem("user", JSON.stringify(found))
     } else {
       setAuthentication(false)
-      if (usernameoremail === "") {
-        setTypedusernameoremail(false);
-      }
-      if (password === "" || !isPasswordValid) {
-        setTypedpass(false);
-      }
     }
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(URL)
-        setData(res.data)
-      } catch (error) {
-        console.error('Error fetching data', error)
-      }
-    }
-    fetchData()
-  }, [])
 
   return <>
     <div className="login">
@@ -69,7 +68,7 @@ const Login = () => {
           <h1 className='logintitle'>Login</h1>
           {
             !authentication ? <p className='incorrect'>
-              User not found <FontAwesomeIcon icon={faX} onClick={() => setAuthentication(true)} style={{ "cursor": "pointer" }} />
+              User not found <X size={14} onClick={() => setAuthentication(true)} style={{ "cursor": "pointer", display: "inline" }} />
             </p> : ''
           }
 
@@ -84,12 +83,11 @@ const Login = () => {
           <div className="passworddiv">
             <input type={showPassword ? "text" : "password"} name='password'
               onChange={(e) => setPassword(e.target.value)}
-              className={passwordValid ? 'login-input' : 'login-input-error'}
+              className={typedPass ? 'login-input' : 'login-input-error'}
             />
             <p className='errormessage' style={{
-              "visibility": passwordValid ? 'hidden' : 'visible'
-            }}>Password must be at least 3 characters and contain at least 1 digit</p>
-            {/* <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> */}
+              "visibility": typedPass ? 'hidden' : 'visible'
+            }}>Password cannot be empty</p>
             {
               showPassword ? <EyeOff size={16} onClick={() => setShowPassword(!showPassword)} className='eyeicon' /> : <Eye size={16} onClick={() => setShowPassword(!showPassword)} className='eyeicon' />
             }

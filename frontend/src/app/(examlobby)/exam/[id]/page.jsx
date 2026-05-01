@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import axios from 'axios'
 import Image from 'next/image'
 
-const url = "http://localhost:3040/tests"
+const url = "/api/tests"
 
 const Exam = () => {
   const [page, setPage] = useState(0)

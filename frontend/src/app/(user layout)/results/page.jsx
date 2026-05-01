@@ -14,7 +14,7 @@ const Results = () => {
       </thead>
       <tbody className='freetst-tbody'>
         {
-          userData ? userData.results.map(({ score, name }) => {
+          userData?.results?.map(({ score, name }) => {
             return <>
               <tr className='freetst-tr'>
                 <td className='freetst-td'>Test {name}</td>
@@ -26,7 +26,7 @@ const Results = () => {
                 </td>
               </tr>
             </>
-          }) : ''
+          })
         }
       </tbody>
     </table>

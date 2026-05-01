@@ -3,18 +3,43 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
-  font-size: x-large;
+  min-height: calc(100vh - 60px);
+  padding: 40px 24px;
+  gap: 16px;
+  text-align: center;
+}
+
+.upcomingpage h1,
+.upcomingpage h2 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.upcomingpage p {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 420px;
+  line-height: 1.6;
 }
 
 .upbutton {
-  background-color: #6f6fec;
+  background: var(--main);
   color: white;
   border: none;
-  padding: 10px 14px;
-  border-radius: 6px;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 30px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  margin-top: 16px;
+  box-shadow: 0 4px 12px rgba(111, 111, 236, 0.25);
+}
+
+.upbutton:hover {
+  background: var(--main-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(111, 111, 236, 0.35);
 }

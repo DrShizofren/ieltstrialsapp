@@ -1,106 +1,62 @@
 "use client"
-import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chart } from "react-google-charts";
+
+const buildChartData = (results) => {
+  const base = [["Attempt", "Score"]];
+  if (!Array.isArray(results) || results.length === 0) return [...base, [1, 0]];
+  return [...base, ...results.map((r, i) => [i + 1, r.score])];
+};
 
 const User = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")))
-  const [number, setNumber] = useState(0)
-  const [loginData, setLoginData] = useState([])
-  const [setted, setSetted] = useState(true)
-  const [chartData, setChartData] = useState([
-    ["Attempt", "Score"],
-    [1, 8],
-  ]);
-
-  const URL = "http://localhost:3030"
-
-  const updateChartData = (results) => {
-    setChartData((prevData) => {
-      let lastPrice = prevData[prevData.length - 1][0];
-      const newData = [...prevData];
-      results.forEach(result => {
-        lastPrice += 1;
-        newData.push([lastPrice, result.score]);
-      });
-      return newData;
-    });
-  };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(URL);
-        setLoginData(res.data)
-      } catch (error) {
-        console.error('Error fetching data', error);
-      }
-    };
-    fetchData();
-    if (setted) {
-      if (userData.results && Array.isArray(userData.results)) {
-        updateChartData(userData.results);
-        setSetted(false)
-      }
-    }
-  }, [])
+  const [chartData, setChartData] = useState(() =>
+    buildChartData(JSON.parse(localStorage.getItem("user"))?.results)
+  );
 
   useEffect(() => {
-    if (loginData && userData) {
-      const matchingUser = loginData.find(user => user._id === userData._id);
-
-      if (matchingUser) {
-        localStorage.setItem("user", JSON.stringify(matchingUser));
-        // console.log(matchingUser);
-        setUserData(matchingUser);
-        // console.log("LocalStorage updated:", matchingUser);
-      } else {
-        console.log("User not found in database.");
-      }
+    const onStorage = () => {
+      const fresh = JSON.parse(localStorage.getItem("user"))
+      setUserData(fresh)
+      setChartData(buildChartData(fresh?.results))
     }
-  }, [loginData]);
+    window.addEventListener("storage", onStorage)
+    return () => window.removeEventListener("storage", onStorage)
+  }, []);
 
   const options = {
-    title: "Last Results and Improvements",
-    titleTextStyle: { color: "#333", fontSize: 18, bold: true },
+    title: "Score Progress",
+    titleTextStyle: { color: "#0f172a", fontSize: 18, bold: true },
     curveType: "function",
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     colors: ["#6f6fec"],
+    pointSize: 6,
+    lineWidth: 3,
+    chartArea: { left: 50, right: 30, top: 50, bottom: 40, width: "90%", height: "75%" },
     hAxis: {
-      gridlines: { color: "#ddd" },
+      gridlines: { color: "#e6e8f0" },
+      baselineColor: "#e6e8f0",
       ticks: [],
-      titleTextStyle: { color: "#666", fontSize: 14 },
-      textStyle: { color: "#666" }
+      titleTextStyle: { color: "#64748b", fontSize: 13 },
+      textStyle: { color: "#64748b", fontSize: 12 }
     },
     vAxis: {
       viewWindow: { max: 9.5, min: 0 },
-      gridlines: { color: "#ddd" },
-      titleTextStyle: { color: "#666", fontSize: 14 },
-      textStyle: { color: "#666" }
+      gridlines: { color: "#e6e8f0" },
+      baselineColor: "#e6e8f0",
+      titleTextStyle: { color: "#64748b", fontSize: 13 },
+      textStyle: { color: "#64748b", fontSize: 12 }
     },
     legend: "none"
   };
   return <>
     <div className={`content ${sidebarOpen ? "blurred" : ""}`}>
-      <div style={{
-        width: "1300px",
-        height: "500px",
-        border: "4px solid #6f6fec",
-        borderRadius: "20px",
-        overflow: "hidden",
-        background: "white",
-        padding: "20px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: "40px",
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-        cursor: "pointer"
-      }}>
+      <div className="chart-card">
         <Chart
           chartType="LineChart"
           width="100%"
-          height="400px"
+          height="380px"
           data={chartData}
           options={options}
         />
@@ -155,7 +111,7 @@ const User = () => {
           </thead>
           <tbody className='freetst-tbody'>
             {
-              userData ? userData.results.map(({ score, name }) => {
+              userData?.results?.map(({ score, name }) => {
                 return <>
                   <tr className='freetst-tr abctable'>
                     <td className='freetst-td left'>Test {name}</td>
@@ -164,7 +120,7 @@ const User = () => {
                     </td>
                   </tr>
                 </>
-              }) : ''
+              })
             }
           </tbody>
         </table>

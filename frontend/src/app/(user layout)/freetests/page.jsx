@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { redirect } from 'next/navigation'
 
-const url = "http://localhost:3040/tests"
+const url = "/api/tests"
 
 const FreeTests = () => {
   const [data, setData] = useState()

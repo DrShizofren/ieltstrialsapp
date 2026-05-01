@@ -1,101 +1,339 @@
-@font-face {
-  font-family: "Signika";
-  src: url("C:\\Users\\Fikret\\Desktop\\ieltstrialsapp\\ieltstrialsapp\\frontend\\src\\fonts\\Signika-Regular.ttf") format("truetype");
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Signika;
-  text-decoration: none;
-  user-select: none;
-  list-style: none;
-}
-
-:root {
-  --main: rgba(111, 111, 236, 0.83);
-}
-
 .settings-page {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  background: var(--bg);
+  padding: 48px 24px 80px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+}
+
+.settings-wrap {
   width: 100%;
-  background-color: #f9f9f9;
-}
-
-.settingssquare {
-  width: 80%;
-  height: 80%;
-  border-radius: 20px;
-  border: 5px solid var(--main);
-  padding: 40px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
-  background: white;
-}
-
-.settingselements {
-  padding: 20px;
-  border: 2px solid var(--main);
-  border-radius: 10px;
-  margin: 15px 0;
+  max-width: 760px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: 0.2s;
-  cursor: pointer;
+  flex-direction: column;
+  gap: 28px;
 }
+
+/* ---- Header ---- */
+.settings-header { display: flex; flex-direction: column; gap: 6px; }
 
 .seth1 {
-  margin-bottom: 25px;
-  /* font-size: 24px; */
-  font-weight: bold;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text);
 }
 
-.settingselements:hover {
-  background-color: var(--main);
+.settings-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ---- Profile card ---- */
+.profile-card {
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(111, 111, 236, 0.08), transparent 55%),
+    var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--main) 0%, var(--main-dark) 100%);
   color: white;
-  transform: scale(1.01);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(111, 111, 236, 0.35);
 }
 
+.profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.profile-info h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+.profile-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.profile-badge {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  background: var(--main-soft);
+  color: var(--main);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.profile-edit {
+  background: var(--surface);
+  color: var(--main);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.profile-edit:hover {
+  background: var(--main);
+  color: white;
+  border-color: var(--main);
+  box-shadow: 0 4px 12px rgba(111, 111, 236, 0.25);
+}
+
+/* ---- Sections ---- */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  padding: 0 4px;
+}
+
+.settings-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Rows ---- */
+.settingselements,
+.logout-row {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.settings-group .settingselements:last-child { border-bottom: none; }
+
+.settingselements:hover,
+.logout-row:hover { background: var(--main-soft); }
+
+.row-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--main-soft);
+  color: var(--main);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.settingselements:hover .row-icon {
+  background: var(--main);
+  color: white;
+  transform: scale(1.05);
+}
+
+.row-icon.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.logout-row {
+  background: var(--surface);
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.logout-row:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+.logout-row:hover .row-icon.danger { background: var(--danger); color: white; }
+.logout-row .row-label { color: var(--danger); }
+
+.row-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.row-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.row-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.row-chevron {
+  color: var(--text-soft);
+  transition: transform 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+.settingselements:hover .row-chevron,
+.logout-row:hover .row-chevron {
+  color: var(--main);
+  transform: translateX(3px);
+}
+.logout-row:hover .row-chevron { color: var(--danger); }
+
+/* ---- Modal ---- */
 .confirm-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 50;
+  padding: 24px;
+  animation: fadeIn 0.15s ease;
 }
 
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
 .confirm-box {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  background: var(--surface);
+  padding: 32px 28px 24px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
   text-align: center;
-  color: black;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.confirm-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--danger-soft);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.confirm-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.confirm-box p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
 }
 
 .confirm-btn,
 .cancel-btn {
-  margin: 10px;
-  padding: 10px 20px;
+  flex: 1;
+  padding: 11px 16px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.15s ease;
 }
 
 .confirm-btn {
-  background: #6f6fec;
+  background: var(--danger);
   color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+.confirm-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
 }
 
 .cancel-btn {
-  background: #ccc;
-  color: black;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.cancel-btn:hover {
+  background: var(--main-soft);
+  color: var(--main);
+  border-color: var(--main);
+}
+
+@media (max-width: 560px) {
+  .profile-card { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .profile-edit { width: 100%; }
 }

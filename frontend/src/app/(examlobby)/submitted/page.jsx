@@ -2,18 +2,14 @@
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import "../submitted/submitted.css"
-import axios from 'axios'
-
-const url = "http://localhost:3040/tests"
+const url = "/api/tests"
 
 const Submitted = () => {
   const [correctCount, setCorrectCount] = useState(0);
   const [ieltsScore, setIeltsScore] = useState();
   const [id, setId] = useState(localStorage.getItem("id") || 12)
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
   const [name, setName] = useState(localStorage.getItem("testName") || '')
   const [data, setData] = useState(null);
-  const [patchUrl, setPatchUrl] = useState("http://localhost:3030/" + user._id + "/results")
   const [hasSentRequest, setHasSentRequest] = useState(false);
   const [section, setSection] = useState(JSON.parse(localStorage.getItem("section")) || [])
 
@@ -21,8 +17,8 @@ const Submitted = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(url);
-        setData(res.data);
+        const res = await fetch(url);
+        setData(await res.json());
       } catch (error) {
         console.error('Error fetching data', error);
       }
@@ -33,26 +29,16 @@ const Submitted = () => {
 
   useEffect(() => {
     if (!ieltsScore || hasSentRequest) return;
-    // console.log(ieltsScore, name);
 
     if (ieltsScore && name && section === "reading") {
-      axios.patch(patchUrl, {
-        "results": {
-          "name": name,
-          "score": ieltsScore
-        }
-      })
-        .then(() => {
-          setHasSentRequest(true);
-        })
-        .catch(error => console.error("Error updating results:", error));
-
-      localStorage.removeItem('answers');
-      localStorage.removeItem('testName');
-      localStorage.removeItem('id');
-    } else {
-      console.log("Failed initialization");
+      const currentUser = JSON.parse(localStorage.getItem("user")) || {}
+      const results = Array.isArray(currentUser.results) ? currentUser.results : []
+      results.push({ name, score: ieltsScore })
+      currentUser.results = results
+      localStorage.setItem("user", JSON.stringify(currentUser))
+      setHasSentRequest(true);
     }
+
     localStorage.removeItem("essayAnswers")
     localStorage.removeItem("answers")
     localStorage.removeItem("id")
